@@ -39,9 +39,9 @@ app.use('/patients', patientsRouter);
 app.use('/reports', reportsRouter);
 
 // MongoDB connection
-// const uri = "mongodb+srv://samiafatima0267:<fYYb5RbIzqswnEqu>@cluster0.iqekj8s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 // mongoose.connect('mongodb://127.0.0.1:27017/healthapp')
-// const uri = "mongodb+srv://samiafatima0267:fYYb5RbIzqswnEqu@cluster0.iqekj8s.mongodb.net/healthapp?retryWrites=true&w=majority";
+
 const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.iqekj8s.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 mongoose.connect(uri)
     .then(() => {
@@ -49,8 +49,7 @@ mongoose.connect(uri)
     })
     .catch((err) => {
         console.error('MongoDB connection error:', err.message);
-        //  console.log('⚠️ Continuing without database connection...');
-        //  renderErrorPage(err, app);
+     
     });
 
 // Catch 404 and forward to error handler
