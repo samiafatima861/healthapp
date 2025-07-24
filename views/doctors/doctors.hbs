@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Options</title>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="display-4">Doctors Portal</h1>
+                <p class="lead">Manage and view doctor information</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <a href="/doctors/register" class="btn btn-primary">Register New Doctor</a>
+                            <a href="/doctors/login" class="btn btn-outline-primary">Doctor Login</a>
+                            <a href="/doctors/all" class="btn btn-outline-secondary">View All Doctors</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Search Doctors</h5>
+                        <form action="/doctors/search" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" name="name" class="form-control" placeholder="Search by doctor name...">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/">Back to Home</a>
+</body>
+</html>

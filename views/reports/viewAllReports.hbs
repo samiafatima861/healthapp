@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Patient Reports</title>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="display-4">All Medical Reports</h1>
+                <p class="lead">Browse and manage all medical reports</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Filter Reports</h5>
+                            <a href="/reports/create" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Create New Report
+                            </a>
+                        </div>
+                        <form action="/reports/filter" method="GET">
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <select class="form-select" name="status">
+                                        <option value="">All Statuses</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="reviewed">Reviewed</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="date" class="form-control" name="date" placeholder="Filter by date">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <button type="submit" class="btn btn-outline-primary w-100">Apply Filters</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{#if reports.length}}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each reports}}
+                    <tr>
+                        <td><small class="text-muted">{{this._id}}</small></td>
+                        <td>
+                            <a href="/patients/{{this.patientId}}">
+                                {{#if this.patientName}}{{this.patientName}}{{else}}{{this.patientId}}{{/if}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/doctors/{{this.doctorId}}">
+                                {{#if this.doctorName}}{{this.doctorName}}{{else}}{{this.doctorId}}{{/if}}
+                            </a>
+                        </td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.date}}</td>
+                        <td>
+                            <span class="badge bg-info">{{this.status}}</span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="/reports/{{this._id}}" class="btn btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/reports/{{this._id}}/edit" class="btn btn-outline-secondary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button onclick="deleteReport('{{this._id}}')" class="btn btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">No Reports Found</h4>
+            <p>There are no medical reports in the system yet.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="/reports/create" class="alert-link">Create a new medical report</a> to get started.
+            </p>
+        </div>
+        {{/if}}
+        
+        <div class="mt-4">
+            <a href="/reports" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Reports Management
+            </a>
+        </div>
+    </div>
+
+    <script>
+    function deleteReport(id) {
+        if (confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
+            fetch(`/reports/${id}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Failed to delete the report.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while trying to delete the report.');
+                });
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Patients</title>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="display-4">All Patients</h1>
+                <p class="lead">View and manage patient records</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Patient Search</h5>
+                            <a href="/patients/register" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Add New Patient
+                            </a>
+                        </div>
+                        <form action="/patients/search" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search by name or email...">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{#if patients.length}}
+        <div class="row">
+            {{#each patients}}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">{{this.name}}</h5>
+                        <span class="badge bg-primary">ID: {{this._id}}</span>
+                    </div>
+                    <div class="card-body">
+                        <p><i class="fas fa-envelope me-2"></i> <strong>Email:</strong> {{this.email}}</p>
+                        {{#if this.age}}
+                        <p><i class="fas fa-birthday-cake me-2"></i> <strong>Age:</strong> {{this.age}}</p>
+                        {{/if}}
+                        {{#if this.gender}}
+                        <p><i class="fas fa-venus-mars me-2"></i> <strong>Gender:</strong> {{this.gender}}</p>
+                        {{/if}}
+                        {{#if this.phone}}
+                        <p><i class="fas fa-phone me-2"></i> <strong>Phone:</strong> {{this.phone}}</p>
+                        {{/if}}
+                        
+                        <div class="d-grid gap-2 mt-3">
+                            <a href="/patients/{{this._id}}" class="btn btn-info btn-sm">
+                                <i class="fas fa-user"></i> View Profile
+                            </a>
+                            <a href="/patients/{{this._id}}/reports" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-file-medical"></i> Medical Reports
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">No Patients Found</h4>
+            <p>There are no patients registered in the system yet.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="/patients/register" class="alert-link">Register a new patient</a> to get started.
+            </p>
+        </div>
+        {{/if}}
+        
+        <div class="mt-4">
+            <a href="/patients" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Patient Portal
+            </a>
+        </div>
+    </div>
+</body>
+</html>

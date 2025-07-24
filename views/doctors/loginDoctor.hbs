@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Doctor</title>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Doctor Login</h2>
+                    </div>
+                    <div class="card-body">
+                        {{#if error}}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {{/if}}
+                        
+                        <form action="/doctors/login" method="POST">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <a href="/doctors/register" class="text-decoration-none">Need an account? Register here</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/doctors" class="btn btn-link">Back to Doctors Portal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

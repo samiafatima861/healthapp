@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Patient Report</title>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Create Medical Report</h2>
+                    </div>
+                    <div class="card-body">
+                        {{#if error}}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {{/if}}
+                        
+                        <form action="/reports/create" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="patientId" class="form-label">Patient</label>
+                                        <select class="form-select" id="patientId" name="patientId" required>
+                                            <option value="" selected disabled>Select patient</option>
+                                            {{#each patients}}
+                                            <option value="{{this._id}}">{{this.name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="doctorId" class="form-label">Doctor</label>
+                                        <select class="form-select" id="doctorId" name="doctorId" required>
+                                            <option value="" selected disabled>Select doctor</option>
+                                            {{#each doctors}}
+                                            <option value="{{this._id}}">Dr. {{this.name}} ({{this.specialty}})</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="title" class="form-label">Report Title</label>
+                                        <input type="text" class="form-control" id="title" name="title" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="date" class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-select" id="status" name="status" required>
+                                            <option value="pending">Pending</option>
+                                            <option value="reviewed">Reviewed</option>
+                                            <option value="completed">Completed</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="diagnosis" class="form-label">Diagnosis</label>
+                                        <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="symptoms" class="form-label">Symptoms</label>
+                                        <textarea class="form-control" id="symptoms" name="symptoms" rows="2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="treatment" class="form-label">Treatment Plan</label>
+                                        <textarea class="form-control" id="treatment" name="treatment" rows="3" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="notes" class="form-label">Additional Notes</label>
+                                        <textarea class="form-control" id="notes" name="notes" rows="2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary">Create Report</button>
+                                    <a href="/reports" class="btn btn-secondary ms-2">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

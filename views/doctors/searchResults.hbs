@@ -1,0 +1,79 @@
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">Search Results</h1>
+            <p class="lead">Showing results for: <strong>"{{searchQuery}}"</strong></p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <a href="/doctors" class="btn btn-secondary mr-2">
+                <i class="fas fa-arrow-left"></i> Back to Doctors Portal
+            </a>
+            <a href="/doctors/all" class="btn btn-info">
+                <i class="fas fa-list"></i> View All Doctors
+            </a>
+        </div>
+    </div>
+
+    <!-- New search form -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Refine Search</h5>
+                    <form action="/doctors/search" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="name" class="form-control" value="{{searchQuery}}" placeholder="Search by doctor name...">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{#if doctors.length}}
+    <div class="row">
+        {{#each doctors}}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{this.specialty}}</h6>
+                    
+                    <div class="card-text">
+                        <p><strong>Qualification:</strong> {{this.qualification}}</p>
+                        <p><strong>Experience:</strong> {{this.experience}} years</p>
+                        <p><strong>Email:</strong> {{this.email}}</p>
+                        
+                        {{#if this.address.city}}
+                        <p><strong>Location:</strong> {{this.address.city}}, {{this.address.state}}</p>
+                        {{/if}}
+                    </div>
+
+                    <div class="mt-3">
+                        <a href="/doctors/{{this._id}}" class="btn btn-info btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Status: {{#if this.available}}Available{{else}}Not Available{{/if}}</small>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <div class="alert alert-warning">
+        <h4 class="alert-heading">No Doctors Found</h4>
+        <p>No doctors match your search criteria: <strong>"{{searchQuery}}"</strong></p>
+        <hr>
+        <p class="mb-0">
+            Try using different keywords or <a href="/doctors/all" class="alert-link">view all doctors</a>.
+        </p>
+    </div>
+    {{/if}}
+</div> 
