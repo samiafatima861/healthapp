@@ -21,5 +21,12 @@ pipeline{
                 bat 'docker tag health-app samiafatima/health-app:latest'
             }
         }
+
+        stage ('Push Image'){
+            steps{
+                bat 'docker login -u samia979 -p samia123fatima'
+                bat  'docker push samiafatima/health-app:latest'
+            }
+        }
     }
 }
