@@ -18,7 +18,7 @@ pipeline{
 
         stage('Tag Image'){
             steps{
-                bat 'tag docker health-app samiafatima/health-app:latest'
+                bat 'docker tag health-app samiafatima/health-app:latest'
             }
         }
     }
