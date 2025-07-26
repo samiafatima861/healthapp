@@ -32,6 +32,7 @@ pipeline{
                         bat 'docker push samiafatima/health-app:latest'
                         
                     }
+                }
             }
         }
     }
