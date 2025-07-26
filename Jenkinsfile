@@ -15,5 +15,11 @@ pipeline{
                 bat 'docker-compose build'
             }
         }
+
+        stage{'Tag Image'}{
+            steps{
+                bat 'tag docker health-app samiafatima/health-app:latest'
+            }
+        }
     }
 }
