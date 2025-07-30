@@ -80,7 +80,7 @@ pipeline {
                     )]) {
                         // Login securely using password-stdin
                         bat '''
-                        echo samiafatima | docker login -u samia979 --password-stdin
+                        echo %samiafatima% | docker login -u %samia979% --password-stdin
                         '''
                         // Push the image
                         bat 'docker push samiafatima/health-app:latest'
