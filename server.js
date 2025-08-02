@@ -1,6 +1,6 @@
 const app = require('./app');
 
-// Use port 8080 instead of 3000 in case there are permission issues
+// Use port of 3000 in case there are permission issues
 const PORT = process.env.PORT || 3000;
 
 // Start server with detailed logging

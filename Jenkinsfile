@@ -83,7 +83,7 @@ pipeline {
                          echo %samia@979fatima% | docker login -u %samia979% --password-stdin
                         '''
                         // Push the image
-                        bat 'docker push samiafatima/health-app:latest'
+                        bat 'docker push samia979/health-app:latest'
                         // Logout after push
                         bat 'docker logout'
                     }
