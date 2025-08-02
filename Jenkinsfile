@@ -76,11 +76,11 @@ pipeline {
                     withCredentials([usernamePassword(
                         credentialsId: 'docker-hub-creds',
                         usernameVariable: 'samia979',
-                        passwordVariable: 'samiafatima'
+                        passwordVariable: 'samia@979fatima'
                     )]) {
-                        // Login securely using password-stdin
+                        // Login securely using password-stdin 
                         bat '''
-                        echo %samiafatima% | docker login -u %samia979% --password-stdin
+                         echo %samia@979fatima% | docker login -u %samia979% --password-stdin
                         '''
                         // Push the image
                         bat 'docker push samiafatima/health-app:latest'
