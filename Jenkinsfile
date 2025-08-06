@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        SSH_KEY_PATH='C:\Users\dell\Downloads\login.pem'
+        SSH_KEY_PATH='C:\\Users\\dell\\Downloads\\login.pem'
         SSH_USER='ec2-user'
         SSH_HOST='52.65.12.156'
     }
