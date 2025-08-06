@@ -75,8 +75,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(
                         credentialsId: 'docker-hub-creds',
-                        usernameVariable: 'samia979',
-                        passwordVariable: 'pinkpanther'
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
                     )]) {
                         // Login securely using password-stdin 
                         // bat '''
