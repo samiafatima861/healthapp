@@ -84,7 +84,7 @@ pipeline {
                         // '''
                        bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
                         // Push the image
-                        bat 'docker push samiafatima/health-app:latest'
+                        bat 'docker push samia979/health-app:latest'
                         // Logout after push
                         bat 'docker logout'
                     }
