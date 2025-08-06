@@ -82,9 +82,7 @@ pipeline {
                         // bat '''
                         //  echo %pinkpanther% | docker login -u %samia979% 
                         // '''
-                         powershell '''
-                        "$Env:DOCKER_PASSWORD" | docker login -u "$Env:DOCKER_USERNAME" --password-stdin
-                        '''
+                       bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
                         // Push the image
                         bat 'docker push samiafatima/health-app:latest'
                         // Logout after push
