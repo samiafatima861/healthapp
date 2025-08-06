@@ -1,53 +1,10 @@
-// pipeline{
-//     agent any
-
-//     stages{
-//          stage ('checkout'){
-//             steps{
-//             //    git url: 'file:///E:/All-Projects-Here/COMPLETED-PROJECTS/Mean-backend-with-nodejs/Health-app', branch: 'main'
-//             git url: 'https://github.com/samiafatima861/healthapp.git', branch: 'main', credentialsId: 'github-pat'
-
-//             }
-//          }
-
-//          stage('build'){
-//             steps{
-//                 bat 'docker-compose build'
-//             }
-//          }
-
-//          stage('Tag Image'){
-//             steps{
-//                 bat 'docker tag health-app samiafatima/health-app:latest'
-//             }
-//          }
-
-        
-
-//         stage('Push Image') {
-//             steps {
-//                 script {
-//                     withCredentials([usernamePassword(
-//                         credentialsId: 'docker-hub-credentials', // your Jenkins credentials ID
-//                         usernameVariable: 'DOCKER_USERNAME',
-//                         passwordVariable: 'DOCKER_PASSWORD'
-//                     )]) {
-//                         // Login securely using password-stdin
-//                         bat '''
-//                         echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
-//                         '''
-//                         // Push the image
-//                         bat 'docker push samiafatima/health-app:latest'
-//                         // Logout after push
-//                         bat 'docker logout'
-//                     }
-//                 }
-//            }
-//         } 
-//     }
-// }
 pipeline {
     agent any
+    environment{
+        SSH_KEY_PATH='C:\Users\dell\Downloads\login.pem'
+        SSH_USER='ec2-user'
+        SSH_HOST='52.65.12.156'
+    }
 
     stages {
         stage('checkout') {
@@ -85,10 +42,17 @@ pipeline {
                        bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
                         // Push the image
                         bat 'docker push samia979/health-app:latest'
-                        // Logout after push
-                        bat 'docker logout'
+                        
                     }
                 }
+            }
+        }
+        stage('Deploy'){
+            steps{
+                bat """
+                ssh -i ${SSH_KEY_PATH} -o StrictHostChecking=no ${SSH_USER}@${SSH_HOST}
+
+                """
             }
         }
     }
