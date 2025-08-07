@@ -50,7 +50,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 bat """
-                ssh -i ${SSH_KEY_PATH} -o StrictHostChecking=no ${SSH_USER}@${SSH_HOST}
+                ssh -i ${SSH_KEY_PATH} -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}
 
                 """
             }
