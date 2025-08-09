@@ -36,9 +36,7 @@ pipeline {
                         passwordVariable: 'DOCKER_PASSWORD'
                     )]) {
                         // Login securely using password-stdin 
-                        // bat '''
-                        //  echo %pinkpanther% | docker login -u %samia979% 
-                        // '''
+                        
                        bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
                         // Push the image
                         bat 'docker push samia979/health-app:latest'
